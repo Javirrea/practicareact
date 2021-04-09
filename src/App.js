@@ -1,28 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import KeyPad from "./components/KeyPad";
+import React, { Component } from "react";
+import Output from "./components/Output";
+import "./App.css";
 
-function App() {
-    return ( <
-        div className = "App" >
-        <
-        header className = "App-header" >
-        <
-        img src = { logo }
-        className = "App-logo"
-        alt = "logo" / >
-        <
-        p >
-        entrar a facebook por favor <
-        /p> <
-        a className = "App-link"
-        href = "https://reactjs.org"
-        target = "_blank"
-        rel = "noopener noreferrer" >
-        Learn React <
-        /a> < /
-        header > <
-        /div>
+class App extends Component {
+  state = {
+    result: "",
+  };
+  buttonPressed = (buttonName) => {
+    if (buttonName === "=") {
+      this.calculate();
+    } else
+      this.setState({
+        result: this.state.result + buttonName,
+      });
+  };
+
+  calculate = () => {
+    this.setState({
+      result: eval(this.state.result),
+    });
+  };
+  render() {
+    return (
+      <div className="App">
+        <div className="calc-body">
+          <Output result={this.state.result} />
+          <KeyPad buttonPressed={this.buttonPressed} />
+        </div>
+      </div>
     );
+  }
 }
-
 export default App;
