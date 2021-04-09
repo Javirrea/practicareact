@@ -18,7 +18,8 @@ class App extends Component {
 
   calculate = () => {
     this.setState({
-      result: eval(this.state.result),
+      // eslint-disable-next-line no-eval
+      result: eval(this.state.result)
     });
   };
   render() {
